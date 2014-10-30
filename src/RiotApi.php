@@ -11,7 +11,6 @@ class RiotApi implements HasRequestClientInterface, IsConfigurableInterface {
 
     use HasRequestClientTrait, IsConfigurableTrait;
 
-    static $requestClient;
     static $requestClientResolver;
 
     const BASE_URL = 'https://{region}.api.pvp.net/';
@@ -40,15 +39,17 @@ class RiotApi implements HasRequestClientInterface, IsConfigurableInterface {
             new \Exception("Game {$game} could not be found");
         }
 
-        return new $gameFqn(static::resolveRequestClient());
+        return new $gameFqn(new static(static::resolveRequestClient()));
+    }
+
+    public static function setRequestClientResolver($callable)
+    {
+        static::$requestClientResolver = $callable;
     }
 
     public static function resolveRequestClient()
     {
-        if (is_null(static::$requestClient)) {
-            static::$requestClient = call_user_func(static::$requestClientResolver);
-        }
-        return static::$requestClient;
+        return call_user_func(static::$requestClientResolver);
     }
 
 } 
