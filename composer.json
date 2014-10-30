@@ -1,0 +1,11 @@
+{
+	"name": "eelkevdbos/riot-games-php",
+	"description": "Riot Games API wrapper for PHP",
+	"require": {
+		"guzzlehttp/guzzle": "~5.0"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "~4.3",
+		"mockery/mockery": "~0.9"
+	}
+}
