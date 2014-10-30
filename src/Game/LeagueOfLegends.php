@@ -1,18 +1,8 @@
 <?php namespace RiotGames\Game;
 
-use RiotGames\RiotApi;
+use RiotGames\Game\LeagueOfLegends\Game;
 
-class LeagueOfLegends {
-
-    /**
-     * @var RiotApi
-     */
-    protected $riot;
-
-    public function __construct(RiotApi $riot)
-    {
-        $this->riot = $riot;
-    }
+class LeagueOfLegends extends Game {
 
     public function getMethods()
     {
@@ -32,14 +22,4 @@ class LeagueOfLegends {
         );
     }
 
-    public function __get($key)
-    {
-        $methods = $this->getMethods();
-
-        if (!isset($methods[$key])) {
-            throw new Exception("Method {$key} could not be found");
-        }
-
-        return new $methods[$key]($this->riot);
-    }
 } 
