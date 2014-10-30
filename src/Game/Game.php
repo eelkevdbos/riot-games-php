@@ -22,7 +22,7 @@ abstract class Game {
         $methods = $this->getMethods();
 
         if (!isset($methods[$key])) {
-            throw new Exception("Method {$key} could not be found");
+            throw new \Exception("Method {$key} could not be found");
         }
 
         return new $methods[$key]($this->riot);
